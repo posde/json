@@ -1,6 +1,6 @@
 <?php
 // JSON CURL tunnel based on code from someone else - can't remember from whom.
-// May the original owner come forward, and I shall reference the person in here.
+// May the original owner come forward, and I shall reference the person in here.   
 
 function pluto_mainJSON($table, $key="", $fields=array("Description"), $join =" where ") {
     // connect to the mysql database
@@ -15,7 +15,8 @@ function pluto_mainJSON($table, $key="", $fields=array("Description"), $join =" 
     }
     
     $sql .= $key;
-    echo $sql;
+    $debug = @$_GET['debug']; 
+    if ($debug) echo $sql;
     $result = mysqli_query($link,$sql);
     if ( ! $result) throw new Exception("No results");
     $content = "--";
@@ -103,10 +104,6 @@ try {
     if ($curl) {
         $uri = "dcerouter:7230/$table?ea=$key";
         
-        // if (is_null($_GET['uri'])) {
-        //     throw new Exception('Bad URI');
-        // }
-
         $ch = curl_init($uri);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -124,6 +121,9 @@ try {
 
     // base64 encode the data
     $data = base64_encode($contents);
+
+    $debug = @$_GET['debug']; 
+    if ($debug) echo $contents;
     
     $json_data = '{ "data" : "'. $data .'" }';
     
