@@ -99,9 +99,7 @@ try {
         throw new Exception("Incorrect table specified. Call script alone to get a list of tables");        
     }
     if ($curl) {
-        $ea = $_GET['ea'];
-
-        $uri = "dcerouter:7230/$table?ea=$ea";
+        $uri = "dcerouter:7230/$table?ea=$key";
         
         // if (is_null($_GET['uri'])) {
         //     throw new Exception('Bad URI');
