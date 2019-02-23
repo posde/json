@@ -12,6 +12,7 @@ function pluto_mainJSON($table, $key="", $fields=array("Description"), $join =" 
     } else {
         $key = "PK_$table = $key";
     }
+    
     $sql .= $key;
     echo $sql;
     $result = mysqli_query($link,$sql);
