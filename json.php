@@ -1,5 +1,6 @@
 <?php
-//Use this to tunnel a file through json for crossdomain access.
+// JSON CURL tunnel based on code from someone else - can't remember from whom.
+// May the original owner come forward, and I shall reference the person in here.
 
 function pluto_mainJSON($table, $key="", $fields=array("Description"), $join =" where ") {
     // connect to the mysql database
