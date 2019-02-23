@@ -1,7 +1,14 @@
 # json
-JSON provider for LinuxMCE
+## JSON provider for LinuxMCE
 
 More and more people want to have access to LinuxMCEs data via JSON. This code provides
 
-a) Access to the MySQL data via filters
-b) Access to the router's memory space to get information about now playing and playlist for specific Entertainment Areas. The JSON_Plugin is needed for this to work.
+1. Access to the MySQL data via filters
+2. Access to the router's memory space to get information about now playing and playlist for specific Entertainment Areas. The [JSON Plugin](http://wiki.linuxmce.org/index.php/JSON_Plugin)  is needed for this to work.
+
+## How to call
+`json.php` will give you a list of tables supported. Tables refer to the information available to be queried.
+
+`json.php?table=rooms` will give you a list of rooms.
+
+`json.php?table=rooms&key=1` will just give you room 1.
