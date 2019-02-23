@@ -12,3 +12,12 @@ More and more people want to have access to LinuxMCEs data via JSON. This code p
 `json.php?table=rooms` will give you a list of rooms.
 
 `json.php?table=rooms&key=1` will just give you room 1.
+## List of supported tables
+1. now_playing
+2. playlist
+3. rooms
+4. ea
+5. lights
+6. drapes
+7. phones
+8. cameras
