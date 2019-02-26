@@ -8,8 +8,10 @@ function pluto_mainJSON($table, $key="", $fields=array("Description"), $join =" 
     mysqli_set_charset($link,'utf8');
     $sql = "SELECT PK_$table" . (count($fields)>0?",".implode(",", $fields):"") . " FROM " . $table;
     $sql .= " $join ";
+    $many = 0; // we show only a single entry.
     if ($key == "") {
         $key = " true ";
+        $many = 1;
     } else {
         $key = "PK_$table = $key";
     }
@@ -22,7 +24,15 @@ function pluto_mainJSON($table, $key="", $fields=array("Description"), $join =" 
     $content = "--";
     $JSONcontent = "";
     // for ($i=0;$i<mysqli_num_rows($result);$i++) {
-    $content = "{\n";
+    
+    if ($many) {
+        $content = "{\n";
+        $tabspace= "   ";
+    } else {
+        $content = "";
+        $tabspace = "";
+    }
+    
     $first = 1;
     while ($row = mysqli_fetch_row($result)) {
         // $JSONcontent += ($i>0?',':'').json_encode(mysqli_fetch_object($result));
@@ -31,20 +41,22 @@ function pluto_mainJSON($table, $key="", $fields=array("Description"), $join =" 
         } else {
             $content .= ",";
         }
-        $content .= "   {\n";
-        $content .= "      \"PK_$table\":" . $row[0];
+        $content .= $tabspace . "{\n";
+        $content .= $tabspace . "   \"PK_$table\":" . $row[0];
         $column = 0;
         foreach($fields as $label) {
             $column++;
             $cell = $row[$column];
             $content .= ",\n";
-            $content .= "      \"$label\": \"" . $cell . "\"";
+            $content .= $tabspace . "   \"$label\": \"" . $cell . "\"";
             
         }
-        $content .= "\n   }";
+        $content .= "\n$tabspace}";
         $content .= "\n";
-      }
-    $content .= "}";
+    }
+    if ($many) {
+        $content .= "}";
+    }
     
     return $content;
 }
